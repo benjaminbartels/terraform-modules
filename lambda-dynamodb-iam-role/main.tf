@@ -14,13 +14,8 @@ data "aws_iam_policy_document" "executor_policy" {
       type        = "Service"
       identifiers = ["lambda.amazonaws.com"]
     }
-    actions = "sts:AssumeRole"
+    actions = ["sts:AssumeRole"]
   }
-}
-
-resource "aws_iam_role" "lambda_executor" {
-  name               = "lambda_${var.app_name}_executor"
-  assume_role_policy = "${aws_iam_policy_document.executor_policy}"
 }
 
 data "aws_iam_policy_document" "crud_policy" {
@@ -37,8 +32,13 @@ data "aws_iam_policy_document" "crud_policy" {
   }
 }
 
+resource "aws_iam_role" "lambda_executor" {
+  name               = "lambda_${var.app_name}_executor"
+  assume_role_policy = "${data.aws_iam_policy_document.executor_policy}"
+}
+
 resource "aws_iam_role_policy" "crud_role" {
   name   = "dynamodb-item-crud-role"
-  role   = "${aws_iam_role.lambda_executor.id}"
+  role   = "${data.aws_iam_role.lambda_executor.id}"
   policy = "${aws_iam_policy_document.crud_policy}"
 }
