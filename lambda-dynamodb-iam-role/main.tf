@@ -48,3 +48,7 @@ resource "aws_iam_role_policy" "crud_role" {
 EOF
 }
 
+resource "aws_iam_role_policy_attachment" "attatch-policy" {
+  role       = "${aws_iam_role.lambda_executor.name}"
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+}
