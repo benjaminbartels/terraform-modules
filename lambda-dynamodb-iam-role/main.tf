@@ -19,7 +19,7 @@ resource "aws_iam_role" "lambda_executor" {
         "Principal": {
           "Service": "lambda.amazonaws.com"
         },
-        "Effect": "Allow",
+        "Effect": "Allow"
       }
     ]
   }
@@ -33,16 +33,16 @@ resource "aws_iam_role_policy" "crud_role" {
   {
     "Version": "2012-10-17",
     "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [
-              "dynamodb:Scan",
-              "dynamodb:GetItem",
-              "dynamodb:PutItem",
-              "dynamodb:DeleteItem"
-            ],
-            "Resource": "*"
-        }
+      {
+          "Effect": "Allow",
+          "Action": [
+            "dynamodb:Scan",
+            "dynamodb:GetItem",
+            "dynamodb:PutItem",
+            "dynamodb:DeleteItem"
+          ],
+          "Resource": "*"
+      }
     ]
   }
 EOF
