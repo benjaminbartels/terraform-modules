@@ -28,7 +28,6 @@ data "aws_iam_policy_document" "crud_policy" {
       "dynamodb:PutItem",
       "dynamodb:DeleteItem"
     ]
-    resources = "${var.table_arns}"
   }
 }
 
