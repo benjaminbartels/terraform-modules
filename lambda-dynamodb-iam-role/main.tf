@@ -1,3 +1,12 @@
+provider "aws" {
+  region = "${var.aws_region}"
+}
+
+terraform {
+  backend "s3" {}
+  required_version = ">= 0.12.0"
+}
+
 data "aws_iam_policy_document" "executor_policy" {
   statement {
     effect = "Allow"
