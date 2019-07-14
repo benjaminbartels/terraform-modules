@@ -28,6 +28,7 @@ data "aws_iam_policy_document" "crud_policy" {
       "dynamodb:PutItem",
       "dynamodb:DeleteItem"
     ]
+    resources = "*"
   }
 }
 
@@ -38,6 +39,6 @@ resource "aws_iam_role" "lambda_executor" {
 
 resource "aws_iam_role_policy" "crud_role" {
   name   = "dynamodb-item-crud-role"
-  role   = "${aws_iam_role.lambda_executor.id}"
+  role   = "${data.aws_iam_role.lambda_executor.id}"
   policy = "${data.aws_iam_policy_document.crud_policy}"
 }
