@@ -9,7 +9,7 @@ terraform {
 
 
 resource "aws_iam_role" "lambda_executor" {
-  name               = "lambda_${var.app_name}_executor"
+  name               = "lambda-${var.app_name}-executor"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
